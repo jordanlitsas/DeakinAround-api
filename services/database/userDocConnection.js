@@ -8,6 +8,12 @@ const registerUser = async (userData) => {
     return savedUser;
 }
 
+const getUserWithEmail = async (email) => {
+    let user = userModel.findOne({email: email});
+    return user;
+}
+
 module.exports = {
-    registerUser
+    registerUser,
+    getUserWithEmail
 }

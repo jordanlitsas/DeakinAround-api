@@ -14,14 +14,22 @@ const registerUser = async (req, res) => {
     }
 
     if (flag){
-        //getUser, make sure there is no current user
-        Services.userService.registerUser(userData).then(user => {
-            if (!user){
-                res.status(400).send({code: 0, error: "Could not insert user."});
+
+        //validate user does not exist
+        Services.userService.getUserWithEmail(userData.email).then(existingUser => {
+            if (!existingUser){
+                Services.userService.registerUser(userData).then(user => {
+                    if (!user){
+                        res.status(500).send({status: 500, error: "Could not insert user."});
+                    } else {
+                        res.status(200).send({status: 200});
+                    }
+                })
             } else {
-                res.status(200).send({code: 0});
+                res.status(400).send({status: 400, error: "This email is already associated with an account."})
             }
         })
+        
     } else {
         res.status(400).send({code: 0, error: errorMessage});
     }
