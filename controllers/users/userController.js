@@ -80,23 +80,23 @@ const updateUser = async (req, res) => {
 
 }
 
-const deleteUserWithUserId = async (req, res) => {
-    let userId = req.body.userId;
-    let validatedUser = await Services.userService.validateUser(userId);
+// const deleteUserWithUserId = async (req, res) => {
+//     let userId = req.body.userId;
+//     let validatedUser = await Services.userService.validateUser(userId);
     
-    if (validatedUser){
+//     if (validatedUser){
 
-        //match userId with password
-        //authent
-        Services.userService.deleteUserWithUserId(userId).then(validatedUser => {
-            if (!validatedUser){
-                res.status(204).send(error: "user")
-            }
-        })
+//         //match userId with password
+//         //authent
+//         Services.userService.deleteUserWithUserId(userId).then(validatedUser => {
+//             if (!validatedUser){
+//                 res.status(204).send(error: "user")
+//             }
+//         })
 
-    }
+//     }
 
-}
+// }
 
 module.exports = {
     registerUser,
