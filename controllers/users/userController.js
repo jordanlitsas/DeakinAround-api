@@ -58,6 +58,11 @@ const loginUser = async (req, res) => {
     })
 }
 
+const getUserWithUserId = async (req, res) => {
+    let userId = req.params.userId;
+    res.send(userId);
+}
+
 //Updates user when logged in with _id that is returned with login response
 const updateUser = async (req, res) => {
 
@@ -101,5 +106,6 @@ const updateUser = async (req, res) => {
 module.exports = {
     registerUser,
     loginUser,
-    updateUser
+    updateUser,
+    getUserWithUserId
 }

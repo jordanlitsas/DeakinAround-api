@@ -10,4 +10,8 @@ router.get('/', (req, res) => {
     Controller.loginUser(req, res);
 })
 
+router.get('/:userId', (req, res) => {
+    Controller.getUserWithUserId(req, res);
+})
+
 module.exports = router;
