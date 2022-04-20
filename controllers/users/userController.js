@@ -59,7 +59,7 @@ const registerUser = async (req, res) => {
 // }
 
 const getUserWithUserId = async (req, res) => {
-    let userId = req.params.userId;
+    let userId = req.query.userId;
     res.send({message: userId});
 }
 
