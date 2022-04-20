@@ -20,13 +20,22 @@ const registerUser = async (req, res) => {
             if (!existingUser){
                 Services.userService.registerUser(userData).then(user => {
                     if (!user){
-                        res.status(500).send({status: 500, error: "Could not insert user."});
+                        res.status(500).send({error: "Could not insert user."});
                     } else {
-                        res.status(200).send({status: 200});
+
+                        //validate user before login
+                        Services.userService.validateUser(user._id).then(validatedUser => {
+                            if (validatedUser){
+                                res.status(200).send({userId: user._id});
+                            } else {
+                                //handle invalid user
+                            }
+                        })
+                        
                     }
                 })
             } else {
-                res.status(400).send({status: 400, error: "This email is already associated with an account."})
+                res.status(400).send({error: "This email is already associated with an account."})
             }
         })
         
@@ -35,6 +44,62 @@ const registerUser = async (req, res) => {
     }
 }
 
+const loginUser = async (req, res) => {
+    //handle authentication - refactor to use OAUTH
+
+    let userData = req.body;
+    Services.getUserWithEmail(userData.email).then(retrievedUser => {
+        if (!retrievedUser){
+            res.status(204).send({error: "Email or password is incorrect."})
+        } 
+        else if (retrievedUser.email == userData.email){
+            res.status(200).send({userId: retrievedUser._id});
+        } 
+    })
+}
+
+//Updates user when logged in with _id that is returned with login response
+const updateUser = async (req, res) => {
+
+    let userId = req.body.userId;
+    let updateData = req.body.updateData;
+
+    //validate user
+    let validatedUser = await Services.userService.validateUser(userId); 
+
+    if (validatedUser){
+        Services.userService.updateUserWithUserId(userId, updateData).then(updatedUser => {
+            if (!updatedUser){
+                res.status(400).send({error: "User could not be updated."});
+            } 
+            res.status(200).send();
+        })
+    } else {
+        res.status(400).send({error: "userId is not valid."});
+    }
+
+}
+
+const deleteUserWithUserId = async (req, res) => {
+    let userId = req.body.userId;
+    let validatedUser = await Services.userService.validateUser(userId);
+    
+    if (validatedUser){
+
+        //match userId with password
+        //authent
+        Services.userService.deleteUserWithUserId(userId).then(validatedUser => {
+            if (!validatedUser){
+                res.status(204).send(error: "user")
+            }
+        })
+
+    }
+
+}
+
 module.exports = {
-    registerUser
+    registerUser,
+    loginUser,
+    updateUser
 }

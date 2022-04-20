@@ -9,11 +9,22 @@ const registerUser = async (userData) => {
 }
 
 const getUserWithEmail = async (email) => {
-    let user = userModel.findOne({email: email});
+    let user = await userModel.findOne({email: email});
     return user;
+}
+
+const updateUserWithUserId = async (userId, userUpdate) => {
+    let updatedUser = await userModel.findByIdAndUpdate({_id: userId}, userUpdate, {new: true});
+    return updatedUser;
+}
+
+const deleteUserWithUserId = async (userId) => {
+    let deletedUser = await userModel.deleteUserWithUserId(userId);
+    return deletedUser;
 }
 
 module.exports = {
     registerUser,
-    getUserWithEmail
+    getUserWithEmail,
+    updateUserWithUserId
 }

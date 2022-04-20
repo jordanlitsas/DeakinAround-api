@@ -4,7 +4,10 @@ const Controller = require('../../controllers/users/userController');
 
 router.post('/', (req, res) => {
     Controller.registerUser(req, res);
-
 });
+
+router.get('/', (req, res) => {
+    Controller.loginUser(req, res);
+})
 
 module.exports = router;

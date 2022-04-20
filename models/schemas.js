@@ -3,10 +3,24 @@ const {Schema} = mongoose;
 
 //TODO: encript password
 const user = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    email: String,
-    password: String
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    }, 
+    email: {
+        type: String,
+        required: true, 
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true,
+        unique: true
+    }
 });
 
 module.exports = {user}
