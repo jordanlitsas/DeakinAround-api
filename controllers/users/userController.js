@@ -60,7 +60,7 @@ const loginUser = async (req, res) => {
 
 const getUserWithUserId = async (req, res) => {
     let userId = req.params.userId;
-    res.send(userId);
+    res.send({message: userId});
 }
 
 //Updates user when logged in with _id that is returned with login response
