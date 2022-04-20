@@ -17,13 +17,13 @@ const getUserWithEmail = async (email) => {
     catch{ return null; }
 }
 
-const updateUserWithUserId = async (userId, userUpdate) => {
-    try {
-        let updatedUser = await userDbConnection.updatedUserWithUserId(userId, userUpdate);
-        return updatedUser;
-    }
-    catch{ return null; }
-}
+// const updateUserWithUserId = async (userId, userUpdate) => {
+//     try {
+//         let updatedUser = await userDbConnection.updatedUserWithUserId(userId, userUpdate);
+//         return updatedUser;
+//     }
+//     catch{ return null; }
+// }
 
 const validateUser = async (userId) => {
     let validUserId = ObjectId.isValid(userId);
@@ -38,18 +38,19 @@ const validateUser = async (userId) => {
     return true;
 }
 
-const deleteUserWithUserId = (userId) => {
-    try {
+// const deleteUserWithUserId = (userId) => {
+//     try {
 
-        let deletedUser = await userDbConnection.deleteUserWithUserId(userId);
-        return deletedUser;
-    }
-    catch { return null; }
-}
+//         let deletedUser = await userDbConnection.deleteUserWithUserId(userId);
+//         return deletedUser;
+//     }
+//     catch { return null; }
+// }
 
 module.exports = {
     registerUser,
     getUserWithEmail,
-    updateUserWithUserId,
-    deleteUserWithUserId
+    validateUser
+    // updateUserWithUserId,
+    // deleteUserWithUserId
 }
