@@ -22,4 +22,19 @@ const user = new mongoose.Schema({
     }
 });
 
-module.exports = {user}
+const studentPage = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    owner_id: {
+        type: String,
+        required: true
+    }
+});
+
+module.exports = {user, studentPage}

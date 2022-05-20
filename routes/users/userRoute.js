@@ -6,11 +6,9 @@ router.post('/', (req, res) => {
     Controller.registerUser(req, res);
 });
 
-// router.get('/', (req, res) => {
-//     Controller.loginUser(req, res);
-// })
 
-router.get('/:userId', (req, res) => {
+
+router.get('/temp/:userId', (req, res) => {
     Controller.getUserWithUserId(req, res);
 })
 

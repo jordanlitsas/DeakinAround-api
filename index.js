@@ -11,6 +11,9 @@ app.set('port', (process.env.PORT || 5000))
 const userRoute = require('./routes/users/userRoute');
 app.use('/api/user', userRoute);
 
+const studentPageRoute = require('./routes/pages/studentPagesRoute');
+app.use('/api/page', studentPageRoute);
+
 app.get('/', (req, res) => {
   res.send("<h1>Welcome</h1>");
 })
