@@ -44,7 +44,7 @@ const registerUser = async (req, res) => {
     }
 }
 
-// const loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
 //     //handle authentication - refactor to use OAUTH
 
     let userData = req.body;
@@ -53,10 +53,10 @@ const registerUser = async (req, res) => {
             res.status(204).send({error: "Email or password is incorrect."})
         } 
         else if (retrievedUser.email == userData.email && retrievedUser.password == userData.password){
-            res.status(200).send({userId: retrievedUser._id});
+            res.status(200).send({user_id: retrievedUser._id});
         } 
     })
-// }
+}
 
 const getUserWithUserId = async (req, res) => {
     let userId = req.params.userId;
@@ -106,7 +106,7 @@ const updateUser = async (req, res) => {
 
 module.exports = {
     registerUser,
-    // loginUser,
+    loginUser,
     // updateUser,
     getUserWithUserId
 }
