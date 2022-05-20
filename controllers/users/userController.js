@@ -60,8 +60,13 @@ const loginUser = async (req, res) => {
 
 const getUserWithUserId = async (req, res) => {
     let userId = req.params.userId;
-    console.log(userId)
-    res.send({message: userId});
+    Services.userService.getUserWithUserId(userId).then(retrievedUser => {
+        if (!retrievedUser){
+            res.status(204).send();
+        } else {
+            res.status(200).send(retrievedUser);
+        }
+    })
 }
 
 //Updates user when logged in with _id that is returned with login response

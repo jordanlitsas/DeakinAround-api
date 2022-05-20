@@ -23,8 +23,14 @@ const deleteUserWithUserId = async (userId) => {
     return deletedUser;
 }
 
+const getUserWithUserId = async(userId) => {
+    let user = await userModel.findById(userId);
+    return user;
+}
+
 module.exports = {
     registerUser,
     getUserWithEmail,
-    updateUserWithUserId
+    updateUserWithUserId,
+    getUserWithUserId
 }

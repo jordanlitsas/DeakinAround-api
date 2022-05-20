@@ -17,6 +17,14 @@ const getUserWithEmail = async (email) => {
     catch{ return null; }
 }
 
+const getUserWithUserId = async (userId) => {
+    try {
+        let user = await userDbConnection.getUserWithUserId(userId);
+        return user;
+    }
+    catch { return null; }
+}
+
 // const updateUserWithUserId = async (userId, userUpdate) => {
 //     try {
 //         let updatedUser = await userDbConnection.updatedUserWithUserId(userId, userUpdate);
@@ -50,7 +58,8 @@ const validateUser = async (userId) => {
 module.exports = {
     registerUser,
     getUserWithEmail,
-    validateUser
+    validateUser,
+    getUserWithUserId
     // updateUserWithUserId,
     // deleteUserWithUserId
 }
