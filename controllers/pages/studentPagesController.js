@@ -9,7 +9,7 @@ const createPage = (req, res) => {
         if (!success){
             res.status(500).send();
         } else {
-            res.status(200).send({pageId: success._id.toString()});
+            res.status(200).send({page_id: success._id.toString()});
         }
     })
 
