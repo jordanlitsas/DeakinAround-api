@@ -48,7 +48,7 @@ const loginUser = async (req, res) => {
 //     //handle authentication - refactor to use OAUTH
 
     let userData = req.body;
-    Services.getUserWithEmail(userData.email).then(retrievedUser => {
+    Services.userService.getUserWithEmail(userData.email).then(retrievedUser => {
         if (!retrievedUser){
             res.status(204).send({error: "Email or password is incorrect."})
         } 
