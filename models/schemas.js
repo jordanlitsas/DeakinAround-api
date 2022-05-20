@@ -25,7 +25,8 @@ const user = new mongoose.Schema({
 const studentPage = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     description: {
         type: String,
