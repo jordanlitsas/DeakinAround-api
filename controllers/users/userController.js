@@ -53,7 +53,7 @@ const loginUser = async (req, res) => {
             res.status(204).send({error: "Email or password is incorrect."})
         } 
         else if (retrievedUser.email == userData.email && retrievedUser.password == userData.password){
-            res.status(200).send({user_id: retrievedUser._id});
+            res.status(200).send({user_id: retrievedUser._id, firstName: retrievedUser.firstName});
         } 
     })
 }
