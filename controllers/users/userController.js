@@ -47,15 +47,15 @@ const registerUser = async (req, res) => {
 // const loginUser = async (req, res) => {
 //     //handle authentication - refactor to use OAUTH
 
-//     let userData = req.body;
-//     Services.getUserWithEmail(userData.email).then(retrievedUser => {
-//         if (!retrievedUser){
-//             res.status(204).send({error: "Email or password is incorrect."})
-//         } 
-//         else if (retrievedUser.email == userData.email){
-//             res.status(200).send({userId: retrievedUser._id});
-//         } 
-//     })
+    let userData = req.body;
+    Services.getUserWithEmail(userData.email).then(retrievedUser => {
+        if (!retrievedUser){
+            res.status(204).send({error: "Email or password is incorrect."})
+        } 
+        else if (retrievedUser.email == userData.email && retrievedUser.password == userData.password){
+            res.status(200).send({userId: retrievedUser._id});
+        } 
+    })
 // }
 
 const getUserWithUserId = async (req, res) => {
