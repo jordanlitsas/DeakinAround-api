@@ -59,7 +59,7 @@ const loginUser = async (req, res) => {
 }
 
 const getUserWithUserId = async (req, res) => {
-    let userId = req.params.userId;
+    let userId = req.query.userId;
     Services.userService.getUserWithUserId(userId).then(retrievedUser => {
         if (!retrievedUser){
             res.status(204).send();
