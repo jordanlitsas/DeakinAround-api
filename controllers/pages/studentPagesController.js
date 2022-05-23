@@ -37,13 +37,12 @@ const getFollowingPages = async (req, res) => {
         let pages = [];
         for (let i = 0; i < followingPages_id.length; i++){
             let page = await pageCollection.getPageWithId(followingPages_id[i]);
-            let pageObj = {title: page.title, description: page.description};
-            console.log(pageObj)
+            let pageObj = {titles: page.title, descriptions: page.description};
             pages.push(pageObj);
         }
            
             
-       
+       console.log(pages)
         res.status(200).send(pages);
     }
 }
