@@ -22,6 +22,22 @@ const user = new mongoose.Schema({
     }
 });
 
+const userPages = new mongoose.Schema({
+    user_id: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    following: {
+        type: [String],
+        required: false
+    },
+    owner: {
+        type: [String],
+        required: false
+    }
+});
+
 const studentPage = new mongoose.Schema({
     title: {
         type: String,
@@ -39,4 +55,4 @@ const studentPage = new mongoose.Schema({
 });
 
 studentPage.index({'$**': 'text'});
-module.exports = {user, studentPage}
+module.exports = {user, studentPage, userPages}

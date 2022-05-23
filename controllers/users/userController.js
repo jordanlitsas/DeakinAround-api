@@ -1,4 +1,5 @@
 const Services = require('../../services');
+const userPageCollection = require('../../services/database/userPageDocConnection');
 
 const registerUser = async (req, res) => {
     let userData = req.body;
@@ -22,10 +23,11 @@ const registerUser = async (req, res) => {
                     if (!user){
                         res.status(500).send({error: "Could not insert user."});
                     } else {
-
+                        userPageCollection.createDoc(user._id);
                         //validate user before login
                         Services.userService.validateUser(user._id).then(validatedUser => {
                             if (validatedUser){
+                                
                                 res.status(200).send({userId: user._id});
                             } else {
                                 //handle invalid user

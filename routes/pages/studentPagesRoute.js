@@ -12,6 +12,14 @@ router.get('/', (req, res) => {
 
 router.get('/id', (req, res) => {
     Controller.getPageWithId(req, res);
+});
+
+router.get('/following', (req, res) => {
+    Controller.getFollowingPages(req, res);
+})
+
+router.post('/follow', (req, res) => {
+    Controller.followPage(req, res);
 })
 
 router.get('/search', (req, res) => {
