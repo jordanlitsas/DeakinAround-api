@@ -1,5 +1,5 @@
 const pageCollection = require('../../services/database/studentPageDocConnection');
-const createPage = (req, res) => {
+const createPage = async (req, res) => {
     let body = req.body;
     if (!body.title || !body.description || !body.owner_id){
         res.status(400).send();
