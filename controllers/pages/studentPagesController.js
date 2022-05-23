@@ -7,24 +7,24 @@ const createPage = async (req, res) => {
         res.status(400).send();
     }
     let pageDoc = {title: body.title, description: body.description, owner_id: body.owner_id};
-    pageCollection.createPage(pageDoc).then(async success => {
-        if (!success){
-            res.status(500).send();
+    let pageCreated = await pageCollection.createPage(pageDoc);
+    if (!pageCreated){
+        res.status(500).send({error: "Page not created"});
+    } else {
+        let user_id = body.owner_id;
+        let page_id = success._id;
+        let onwershipClaimed = await userPageCollection.claimOwnership(user_id, page_id);
+        if (!onwershipClaimed){
+            res.status(500).send({error: "Ownership not claimed"});
         } else {
-            success = await userPageCollection.claimOwnership(success._id, body.owner_id);
-            if (success){
-                success = await userPageCollection.followPage(body.owner_id, success._id);
-                if (success){
-                    res.status(200).send({page_id: success._id.toString()});
-                } else{
-                    res.status(500).send({error: "Could not follow page"});
-                    }
-                }
-             else {
-                res.status(500).send({error: "Could not claim ownership of page"});
+            let userFollowingNewPage = await userPageCollection.followPage(user_id, page._id);
+            if (!userFollowingNewPage){
+                res.status(500).send({error: "User not following new page."})
+            } else {
+                res.status(200).send({page_id: page_id});
             }
         }
-    })
+    }
 }
 
 const getFollowingPages = async (req, res) => {

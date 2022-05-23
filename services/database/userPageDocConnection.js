@@ -2,7 +2,7 @@ const schemas = require('../../models/schemas');
 const mongoose = require('mongoose');
 const userPages = mongoose.model('user_page', schemas.userPages);
 
-const claimOwnership = async (page_id, user_id) => {
+const claimOwnership = async (user_id, page_id) => {
     let success = await userPages.findOneAndUpdate({user_id: user_id}, {$addToSet: {owner: page_id}}, {new: true});
     return success;
 }
