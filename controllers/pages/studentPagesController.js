@@ -13,8 +13,14 @@ const createPage = async (req, res) => {
         } else {
             success = await userPageCollection.claimOwnership(success._id, body.owner_id);
             if (success){
-                res.status(200).send({page_id: success._id.toString()});
-            } else {
+                success = await userPageCollection.followPage(body.owner_id, success._id);
+                if (success){
+                    res.status(200).send({page_id: success._id.toString()});
+                } else{
+                    res.status(500).send({error: "Could not follow page"});
+                    }
+                }
+             else {
                 res.status(500).send({error: "Could not claim ownership of page"});
             }
         }
