@@ -16,7 +16,7 @@ const getPagesWithTitleContaining = async (titleSearch) => {
     let pages = studentPageModel.find({$text: {$search: { titleSearch}}});
 }
 
-const getPageWithId = (page_id) => {
+const getPageWithId = async (page_id) => {
     let page = await studentPageModel.findById({id: page_id});
     return page;
 }
