@@ -15,7 +15,7 @@ const createDoc = async (user_id) => {
 
 const getFollowingPages = async (user_id) => {
     let followingPages = await userPages.findOne({user_id: user_id});
-    followingPages = followingPages.following;
+    followingPages = followingPages;
     return followingPages;
 }
 
