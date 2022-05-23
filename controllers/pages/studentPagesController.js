@@ -14,7 +14,7 @@ const createPage = (req, res) => {
     })
 }
 
-const getPageWithId = (req, res) => {
+const getPageWithId = async (req, res) => {
     let page_id = req.query.page_id;
     pageCollection.getPageWithId(page_id).then(page => {
         if (!page){
