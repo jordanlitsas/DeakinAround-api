@@ -18,8 +18,8 @@ const getPagesWithTitleContaining = async (titleSearch) => {
 }
 
 const getPageWithId = async (page_id) => {
-    page_id = ObjectId(page_id);
-    let page = await studentPageModel.findById({id: page_id});
+    let _id = ObjectId(page_id);
+    let page = await studentPageModel.findById({id: _id});
     return page;
 }
 
