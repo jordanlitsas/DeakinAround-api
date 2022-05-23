@@ -1,5 +1,6 @@
 const Services = require('../../services');
 const userPageCollection = require('../../services/database/userPageDocConnection');
+const userCollection = require('../../services/database/userDocConnection');
 
 const registerUser = async (req, res) => {
     let userData = req.body;
@@ -16,33 +17,22 @@ const registerUser = async (req, res) => {
 
     if (flag){
 
-        //validate user does not exist
-        Services.userService.getUserWithEmail(userData.email).then(existingUser => {
-            if (!existingUser){
-                Services.userService.registerUser(userData).then(user => {
-                    if (!user){
-                        res.status(500).send({error: "Could not insert user."});
-                    } else {
-                        userPageCollection.createDoc(user._id);
-                        //validate user before login
-                        Services.userService.validateUser(user._id).then(validatedUser => {
-                            if (validatedUser){
-                                
-                                res.status(200).send({userId: user._id});
-                            } else {
-                                //handle invalid user
-                            }
-                        })
-                        
-                    }
-                })
+        let existingUser = await userCollection.getUserWithEmail(userData.email);
+        if (!existingUser){
+            let newUser = await userCollection.registerUser(userData);
+            if (!newUser){
+                res.status(500).send({error: "User not inserted."})
             } else {
-                res.status(400).send({error: "This email is already associated with an account."})
+                let newUserPagesDoc = await userPageCollection.createDoc(newUser._id);
+                if (!newUserPagesDoc){
+                    res.status(500).send({error: "UserPage doc not inserted."})
+                } else {
+                    res.status(200).send({user_id: newUser._id});
+                }
             }
-        })
-        
-    } else {
-        res.status(400).send({code: 0, error: errorMessage});
+        } else {
+            res.status(400).send({error: "This email is taken."})
+        }
     }
 }
 
