@@ -1,6 +1,7 @@
 const schemas = require('../../models/schemas');
 const mongoose = require('mongoose');
 const studentPageModel = mongoose.model('student_page', schemas.studentPage);
+const { ObjectId } = require('mongodb');
 
 const createPage = async (pageData) => {
     let page = new studentPageModel(pageData);
@@ -17,6 +18,7 @@ const getPagesWithTitleContaining = async (titleSearch) => {
 }
 
 const getPageWithId = async (page_id) => {
+    page_id = ObjectId(page_id);
     let page = await studentPageModel.findById({id: page_id});
     return page;
 }
