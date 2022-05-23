@@ -12,7 +12,7 @@ const createPage = async (req, res) => {
         res.status(500).send({error: "Page not created"});
     } else {
         let user_id = body.owner_id;
-        let page_id = success._id;
+        let page_id = pageCreated._id;
         let onwershipClaimed = await userPageCollection.claimOwnership(user_id, page_id);
         if (!onwershipClaimed){
             res.status(500).send({error: "Ownership not claimed"});
