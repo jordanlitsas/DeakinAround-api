@@ -8,8 +8,21 @@ const createPage = async (pageData) => {
     return newPage;
 }
 
+const getUserFollowedPage = async (user_id) => {
+    
+}
 
+const getPagesWithTitleContaining = async (titleSearch) => {
+    let pages = studentPageModel.find({$text: {$search: { titleSearch}}});
+}
+
+const getPageWithId = (page_id) => {
+    let page = await studentPageModel.findById({id: page_id});
+    return page;
+}
 
 module.exports = {
-   createPage
+   createPage,
+   getPagesWithTitleContaining,
+   getPageWithId
 }

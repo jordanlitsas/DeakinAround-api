@@ -12,8 +12,24 @@ const createPage = (req, res) => {
             res.status(200).send({page_id: success._id.toString()});
         }
     })
-
-
 }
 
-module.exports = {createPage};
+const getPageWithId = (req, res) => {
+    let page_id = req.query.page_id;
+    pageCollection.getPageWithId(page_id).then(page => {
+        if (!page){
+            res.status(204).send();
+        } else {
+            res.status(200).send({title: page.title, description: page.description});
+        }
+    })
+}
+
+const getPagesWithTitleContaining = async (req, res) => {
+    let searchTerm = req.query.searchTerm;
+    pageCollection.getPagesWithTitleContaining(searchTerm).then(pages => {
+        res.send(pages);
+    })
+}
+
+module.exports = {createPage, getPagesWithTitleContaining, getPageWithId};

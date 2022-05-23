@@ -6,7 +6,17 @@ router.post('/', (req, res) => {
     Controller.createPage(req, res);
 });
 
+router.get('/', (req, res) => {
+    Controller.getUserFollowedPage(req, res);
+});
 
+router.get('/id', (req, res) => {
+    Controller.getPageWithId(req, res);
+})
+
+router.get('/search', (req, res) => {
+    Controller.getPagesWithTitleContaining(req, res);
+})
 
 
 module.exports = router;

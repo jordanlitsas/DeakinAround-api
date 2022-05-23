@@ -38,4 +38,5 @@ const studentPage = new mongoose.Schema({
     }
 });
 
+studentPage.index({'$**': 'text'});
 module.exports = {user, studentPage}
