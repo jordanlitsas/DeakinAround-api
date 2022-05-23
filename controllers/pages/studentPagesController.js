@@ -17,7 +17,7 @@ const createPage = async (req, res) => {
         if (!onwershipClaimed){
             res.status(500).send({error: "Ownership not claimed"});
         } else {
-            let userFollowingNewPage = await userPageCollection.followPage(user_id, page._id);
+            let userFollowingNewPage = await userPageCollection.followPage(user_id, page_id);
             if (!userFollowingNewPage){
                 res.status(500).send({error: "User not following new page."})
             } else {
