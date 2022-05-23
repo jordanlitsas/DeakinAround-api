@@ -29,6 +29,7 @@ const createPage = async (req, res) => {
 
 const getFollowingPages = async (req, res) => {
     let user_id = req.query.user_id;
+    user_id = "628b7a9b60c743205df9a28e";
     let followingPages_id = await userPageCollection.getFollowingPages(user_id);
     if (!followingPages_id){
         res.status(500).send();
