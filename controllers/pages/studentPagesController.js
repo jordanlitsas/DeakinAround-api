@@ -98,11 +98,27 @@ const getPageWithVal = async (req, res) => {
     
 }
 
+const isUserFollowing = async (req, res) => {
+    let user_id = req.query.user_id;
+    let page_id = req.query.page_id;
+    userPageCollection.getFollowingPages(user_id).then(doc => {
+        if (!doc){
+            res.status(400).send({error: "Didn't return UserPageDoc."});
+        }
+        else if (doc.following.includes(page_id)){
+            res.status(200).send()
+        } else {
+            res.status(204).send();
+        }
+    })
+}
 module.exports = {
     createPage, 
     getPagesWithTitleContaining, 
     getPageWithId, 
     getFollowingPages, 
     followPage,
-    getPageWithVal
+    getPageWithVal, 
+    isUserFollowing
+    
 };

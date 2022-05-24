@@ -28,6 +28,10 @@ router.get('/search', (req, res) => {
 
 router.get('/val', (req, res) => {
     Controller.getPageWithVal(req, res);
+});
+
+router.get('/is_following', (req, res) => {
+    Controller.isUserFollowing(req, res);
 })
 
 module.exports = router;
