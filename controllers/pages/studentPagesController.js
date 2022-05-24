@@ -68,13 +68,27 @@ const getPagesWithTitleContaining = async (req, res) => {
 const followPage = async (req, res) => {
     let user_id = req.body.user_id;
     let page_id = req.body.page_id;
-    userPageCollection.followPage(user_id, page_id).then(success => {
-        if (!success){
-            res.status(500).send({error: "Could not follow page"});
-        } else {
-            res.status(200).send();
-        }
-    })
+
+    let alreadyFollowing = await userPageCollection.getFollowingPages(user_id);
+    // res.send(alreadyFollowing)
+    if (alreadyFollowing.following.includes(page_id)){
+        userPageCollection.unfollowPage(user_id, page_id).then(success => {
+            if (!success){
+                res.status(500).send({error: "Could not unfollow page"});
+            } else {
+                res.status(200).send("unfollowed");
+            }
+        });
+    }else {
+        userPageCollection.followPage(user_id, page_id).then(success => {
+            if (!success){
+                res.status(500).send({error: "Could not follow page"});
+            } else {
+                res.status(200).send("followed");
+            }
+        })
+    }
+
 }
 
 const getPageWithVal = async (req, res) => {

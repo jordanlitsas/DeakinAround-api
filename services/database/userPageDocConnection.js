@@ -15,7 +15,6 @@ const createDoc = async (user_id) => {
 
 const getFollowingPages = async (user_id) => {
     let followingPages = await userPages.findOne({user_id: user_id});
-
     return followingPages;
 }
 
@@ -24,9 +23,22 @@ const followPage = async (user_id, page_id) => {
     return success;
 }
 
+const unfollowPage = async (user_id, page_id) => {
+    try{
+        let doc = await userPages.findOne({user_id: user_id});
+        await doc.following.pull(page_id);
+        await doc.save();
+        return true;
+    } catch{
+        return false;
+    }
+   
+}
+
 module.exports = {
     createDoc,
     claimOwnership,
     getFollowingPages,
-    followPage
+    followPage,
+    unfollowPage
 }
