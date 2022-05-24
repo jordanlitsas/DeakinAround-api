@@ -60,6 +60,7 @@ const getPageWithId = async (req, res) => {
 
 const getPagesWithTitleContaining = async (req, res) => {
     let searchTerm = req.query.searchTerm;
+    console.log(searchTerm)
     pageCollection.getPagesWithTitleContaining(searchTerm).then(pages => {
         res.send(pages);
     })

@@ -1,5 +1,6 @@
 const schemas = require('../../models/schemas');
 const mongoose = require('mongoose');
+const { search } = require('../../routes/pages/studentPagesRoute');
 const studentPageModel = mongoose.model('student_page', schemas.studentPage);
 
 const createPage = async (pageData) => {
@@ -14,7 +15,7 @@ const getPageWithVal = async (query) => {
 }
 
 const getPagesWithTitleContaining = async (titleSearch) => {
-    let pages = studentPageModel.find({$text: {$search: { titleSearch}}});
+    let pages = await studentPageModel.find({title: { "$regex": titleSearch}});
     return pages;
 }
 
