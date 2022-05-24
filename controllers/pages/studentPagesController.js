@@ -30,20 +30,19 @@ const createPage = async (req, res) => {
 const getFollowingPages = async (req, res) => {
     let user_id = req.query.user_id;
     
-    let followingPages_id = await userPageCollection.getFollowingPages(user_id);
-    if (!followingPages_id){
-        res.status(500).send();
+    let followingPages = await userPageCollection.getFollowingPages(user_id);
+    if (!followingPages){
+        res.status(500).send({error: "Return null"});
     } else {
-        console.log(followingPages_id);
         let pages = [];
-        for (let i = 0; i < followingPages_id.length; i++){
-            let page = await pageCollection.getPageWithId(followingPages_id[i]);
+        for (let i = 0; i < followingPages.following.length; i++){
+            let page = await pageCollection.getPageWithId(followingPages.following[i]);
             let pageObj = {titles: page.title, descriptions: page.description};
             pages.push(pageObj);
         }
            
             
-       console.log(pages)
+    //    console.log(pages)
         res.status(200).send(pages);
     }
 }
