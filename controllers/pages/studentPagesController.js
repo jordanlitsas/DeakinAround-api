@@ -42,7 +42,7 @@ const getFollowingPages = async (req, res) => {
         }
            
             
-    //    console.log(pages)
+        console.log(pages)
         res.status(200).send(pages);
     }
 }
