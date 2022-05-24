@@ -77,4 +77,28 @@ const followPage = async (req, res) => {
     })
 }
 
-module.exports = {createPage, getPagesWithTitleContaining, getPageWithId, getFollowingPages, followPage};
+const getPageWithVal = async (req, res) => {
+    let operator = req.query.operator;
+    let value = req.query.value;
+
+    switch(operator){
+        case "title":
+            pageCollection.getPageWithVal({title: value}).then(page => {
+                if (!page){
+                    res.status(204).send();
+                } else {
+                    res.status(200).send(page);
+                }
+            })
+    }
+    
+}
+
+module.exports = {
+    createPage, 
+    getPagesWithTitleContaining, 
+    getPageWithId, 
+    getFollowingPages, 
+    followPage,
+    getPageWithVal
+};

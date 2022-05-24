@@ -8,12 +8,14 @@ const createPage = async (pageData) => {
     return newPage;
 }
 
-const getUserFollowedPage = async (user_id) => {
-    
+const getPageWithVal = async (query) => {
+    let page = studentPageModel.findOne(title);
+    return page;
 }
 
 const getPagesWithTitleContaining = async (titleSearch) => {
     let pages = studentPageModel.find({$text: {$search: { titleSearch}}});
+    return pages;
 }
 
 const getPageWithId = async (page_id) => {
@@ -24,5 +26,6 @@ const getPageWithId = async (page_id) => {
 module.exports = {
    createPage,
    getPagesWithTitleContaining,
-   getPageWithId
+   getPageWithId,
+   getPageWithVal
 }

@@ -26,5 +26,8 @@ router.get('/search', (req, res) => {
     Controller.getPagesWithTitleContaining(req, res);
 })
 
+router.get('/val', (req, res) => {
+    Controller.getPageWithVal(req, res);
+})
 
 module.exports = router;
