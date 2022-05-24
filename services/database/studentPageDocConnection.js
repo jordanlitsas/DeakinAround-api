@@ -9,7 +9,7 @@ const createPage = async (pageData) => {
 }
 
 const getPageWithVal = async (query) => {
-    let page = studentPageModel.findOne(title);
+    let page = studentPageModel.findOne(query);
     return page;
 }
 
