@@ -79,15 +79,19 @@ const followPage = async (req, res) => {
 
 const getPageWithVal = async (req, res) => {
     let operator = req.query.operator;
-    let value = req.query.value;
+    let query = req.query.query;
+    let val = req.query.val;
 
     switch(operator){
         case "title":
-            pageCollection.getPageWithVal({title: value}).then(page => {
+            pageCollection.getPageWithVal({title: query}).then(page => {
                 if (!page){
                     res.status(204).send();
                 } else {
-                    res.status(200).send(page);
+                    if (val.equals("_id")){
+                        res.status(200).send({_id: page._id});
+
+                    }
                 }
             })
     }
