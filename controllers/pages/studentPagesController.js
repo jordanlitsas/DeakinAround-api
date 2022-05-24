@@ -89,7 +89,7 @@ const getPageWithVal = async (req, res) => {
                     res.status(204).send();
                 } else {
                     if (val.equals("_id")){
-                        res.status(200).send({_id: page._id});
+                        res.status(200).send({page_id: page._id});
 
                     }
                 }
