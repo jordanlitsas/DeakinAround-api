@@ -76,7 +76,7 @@ const followPage = async (req, res) => {
             if (!success){
                 res.status(500).send({error: "Could not unfollow page"});
             } else {
-                res.status(200).send("unfollowed");
+                res.status(200).send();
             }
         });
     }else {
@@ -84,7 +84,7 @@ const followPage = async (req, res) => {
             if (!success){
                 res.status(500).send({error: "Could not follow page"});
             } else {
-                res.status(200).send("followed");
+                res.status(200).send();
             }
         })
     }
