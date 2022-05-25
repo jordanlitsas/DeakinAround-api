@@ -1,3 +1,4 @@
+const { Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
@@ -53,6 +54,21 @@ const studentPage = new mongoose.Schema({
         required: true
     }
 });
-
 studentPage.index({'$**': 'text'});
-module.exports = {user, studentPage, userPages}
+
+const contribution = new mongoose.Schema({
+    authorFirstName: {type: String},
+    authorLastName: {type: String},
+    author_id: {type: String},
+    content: {type: String},
+    timePosted: {type: String},
+    likes: {type: Number, default: 0}
+});
+const post = new mongoose.Schema({
+    page_id: {type: String, required: true},
+    topLevelPost: { type: contribution, required: true},
+    comments: { type: [contribution ]}
+});
+
+
+module.exports = {user, studentPage, userPages, post, contribution}
