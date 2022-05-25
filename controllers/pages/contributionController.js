@@ -2,6 +2,8 @@ const { response } = require('express');
 const contributionBuilder = require('../../services/database/contributionBuilder');
 const postCollection = require('../../services/database/postDocConnection');
 const userCollection = require('../../services/database/userDocConnection');
+
+
 const createPost = async (req, res) => {
     let data = req.body;
     if (Object.keys(data).length === 0){ res.status(400).send({error: "Empty request"}); }
@@ -61,7 +63,7 @@ const getPostsWithPageId = async (req, res) => {
                 });
                 response.push(post);
             });
-            res.status(200).send({posts: response});
+            res.status(200).send(response);
         }
     })
 }
