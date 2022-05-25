@@ -53,7 +53,7 @@ const getPostsWithPageId = async (req, res) => {
 
                 postObj.comments.forEach(commentObj => {
                     let comment = {
-                        comment_id: commentObj._id,
+                        comment_id: commentObj._id.toString(),
                         name: `${commentObj.authorFirstName} ${commentObj.authorLastName}`,
                         content: commentObj.content,
                         timePosted: commentObj.timePosted,
