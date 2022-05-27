@@ -8,8 +8,8 @@ const registerUser = async (userData) => {
     return savedUser;
 }
 
-const getUserWithEmail = async (email) => {
-    let user = await userModel.findOne({email: email});
+const getUserWithAuth = async (auth) => {
+    let user = await userModel.findOne({auth: auth});
     return user;
 }
 
@@ -30,7 +30,7 @@ const getUserWithUserId = async(userId) => {
 
 module.exports = {
     registerUser,
-    getUserWithEmail,
+    getUserWithAuth,
     updateUserWithUserId,
     getUserWithUserId
 }

@@ -9,7 +9,7 @@ const registerUser = async (userData) => {
     } catch{ return null; }
 }
 
-const getUserWithEmail = async (email) => {
+const getUserWithAuth = async (email) => {
     try {
         let user = await userDbConnection.getUserWithEmail(email);
         return user;
@@ -57,7 +57,7 @@ const validateUser = async (userId) => {
 
 module.exports = {
     registerUser,
-    getUserWithEmail,
+    getUserWithAuth,
     validateUser,
     getUserWithUserId
     // updateUserWithUserId,
