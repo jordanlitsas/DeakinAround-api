@@ -1,6 +1,7 @@
 const Services = require('../../services');
 const userPageCollection = require('../../services/database/userPageDocConnection');
 const userCollection = require('../../services/database/userDocConnection');
+const { userService } = require('../../services');
 
 const registerUser = async (req, res) => {
     let userData = req.body;
@@ -37,8 +38,6 @@ const registerUser = async (req, res) => {
 }
 
 const loginUser = async (req, res) => {
-//     //handle authentication - refactor to use OAUTH
-
     let auth = req.body.auth;
     console.log(auth)
     Services.userService.getUserWithAuth(auth).then(retrievedUser => {
@@ -62,49 +61,20 @@ const getUserWithUserId = async (req, res) => {
     })
 }
 
-//Updates user when logged in with _id that is returned with login response
-const updateUser = async (req, res) => {
-
-    let userId = req.body.userId;
-    let updateData = req.body.updateData;
-
-    //validate user
-    let validatedUser = await Services.userService.validateUser(userId); 
-
-    if (validatedUser){
-        Services.userService.updateUserWithUserId(userId, updateData).then(updatedUser => {
-            if (!updatedUser){
-                res.status(400).send({error: "User could not be updated."});
-            } 
+const configUserAuth = async (req ,res) => {
+    userService.configUserAuth(user_id, auth).then(success => {
+        if (!success){
+            res.status(500).send();
+        } else {
             res.status(200).send();
-        })
-    } else {
-        res.status(400).send({error: "userId is not valid."});
-    }
-
+        }
+    })
 }
 
-// const deleteUserWithUserId = async (req, res) => {
-//     let userId = req.body.userId;
-//     let validatedUser = await Services.userService.validateUser(userId);
-    
-//     if (validatedUser){
-
-//         //match userId with password
-//         //authent
-//         Services.userService.deleteUserWithUserId(userId).then(validatedUser => {
-//             if (!validatedUser){
-//                 res.status(204).send(error: "user")
-//             }
-//         })
-
-//     }
-
-// }
 
 module.exports = {
     registerUser,
     loginUser,
-    // updateUser,
+    configUserAuth,
     getUserWithUserId
 }

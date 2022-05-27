@@ -14,4 +14,8 @@ router.get('/', (req, res) => {
     Controller.getUserWithUserId(req, res);
 })
 
+router.put('/auth', (req, res) => {
+    Controller.configUserAuth(req, res);
+})
+
 module.exports = router;

@@ -25,13 +25,14 @@ const getUserWithUserId = async (userId) => {
     catch { return null; }
 }
 
-// const updateUserWithUserId = async (userId, userUpdate) => {
-//     try {
-//         let updatedUser = await userDbConnection.updatedUserWithUserId(userId, userUpdate);
-//         return updatedUser;
-//     }
-//     catch{ return null; }
-// }
+const configUserAuth = async (user_id, auth) =>  {
+    try{
+        let success = await userDbConnection.configUserAuth(user_id, auth);
+        return success;
+    } 
+    catch{ return null; }
+
+}
 
 const validateUser = async (userId) => {
     let validUserId = ObjectId.isValid(userId);
@@ -46,20 +47,11 @@ const validateUser = async (userId) => {
     return true;
 }
 
-// const deleteUserWithUserId = (userId) => {
-//     try {
-
-//         let deletedUser = await userDbConnection.deleteUserWithUserId(userId);
-//         return deletedUser;
-//     }
-//     catch { return null; }
-// }
 
 module.exports = {
     registerUser,
     getUserWithAuth,
     validateUser,
-    getUserWithUserId
-    // updateUserWithUserId,
-    // deleteUserWithUserId
+    getUserWithUserId,
+    configUserAuth
 }
