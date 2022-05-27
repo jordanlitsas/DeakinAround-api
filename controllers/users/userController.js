@@ -40,7 +40,9 @@ const loginUser = async (req, res) => {
 //     //handle authentication - refactor to use OAUTH
 
     let auth = req.body.auth;
+    console.log(auth)
     Services.userService.auth(auth).then(retrievedUser => {
+        console.log(retrievedUser)
         if (!retrievedUser){
             res.status(204).send({error: "Auth incorrect"})
         } 
