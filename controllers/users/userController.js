@@ -18,7 +18,6 @@ const registerUser = async (req, res) => {
 
     if (flag){
 
-        if (!existingUser){
             let newUser = await userCollection.registerUser(userData);
             if (!newUser){
                 res.status(500).send({error: "User not inserted."})
@@ -33,7 +32,6 @@ const registerUser = async (req, res) => {
         } else {
             res.status(400).send({error: "This email is taken."})
         }
-    }
 }
 
 const loginUser = async (req, res) => {
