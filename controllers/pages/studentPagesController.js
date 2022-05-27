@@ -37,7 +37,7 @@ const getFollowingPages = async (req, res) => {
         let pages = [];
         for (let i = 0; i < followingPages.following.length; i++){
             let page = await pageCollection.getPageWithId(followingPages.following[i]);
-            let pageObj = {titles: page.title, descriptions: page.description};
+            let pageObj = {titles: page.title, descriptions: page.description, page_id: followingPages.following[i]};
             pages.push(pageObj);
         }
            
