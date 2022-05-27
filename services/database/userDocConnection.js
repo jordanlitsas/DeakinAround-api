@@ -9,6 +9,7 @@ const registerUser = async (userData) => {
 }
 
 const getUserWithAuth = async (auth) => {
+    console.log("db " + auth)
     let user = await userModel.findOne({auth: auth});
     return user;
 }

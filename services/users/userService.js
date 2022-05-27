@@ -9,9 +9,9 @@ const registerUser = async (userData) => {
     } catch{ return null; }
 }
 
-const getUserWithAuth = async (email) => {
+const getUserWithAuth = async (auth) => {
     try {
-        let user = await userDbConnection.getUserWithEmail(email);
+        let user = await userDbConnection.getUserWithAuth(auth);
         return user;
     }
     catch{ return null; }
