@@ -29,9 +29,17 @@ const getUserWithUserId = async(userId) => {
     return user;
 }
 
+const configUserAuth = async (user_id, auth) => {
+    let success = await userModel.findOne({_id: user_id});
+    success.auth = auth;
+    success = await success.save();
+    return success;
+}
+
 module.exports = {
     registerUser,
     getUserWithAuth,
     updateUserWithUserId,
-    getUserWithUserId
+    getUserWithUserId,
+    configUserAuth
 }

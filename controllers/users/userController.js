@@ -62,6 +62,8 @@ const getUserWithUserId = async (req, res) => {
 }
 
 const configUserAuth = async (req ,res) => {
+    let user_id = req.body.user_id;
+    let auth = req.body.auth;
     userService.configUserAuth(user_id, auth).then(success => {
         if (!success){
             res.status(500).send();
