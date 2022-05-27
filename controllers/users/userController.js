@@ -44,12 +44,11 @@ const loginUser = async (req, res) => {
     Services.userService.getUserWithAuth(auth).then(retrievedUser => {
         console.log(retrievedUser)
         if (!retrievedUser){
-            res.status(204).send({error: "Auth incorrect"})
-        } 
-        else if (retrievedUser.email == userData.email && retrievedUser.password == userData.password){
+            res.status(204).send()
+        } else{
             res.status(200).send({user_id: retrievedUser._id, firstName: retrievedUser.firstName});
         } 
-    })
+    });
 }
 
 const getUserWithUserId = async (req, res) => {
