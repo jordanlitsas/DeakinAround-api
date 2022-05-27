@@ -19,10 +19,7 @@ const updateUserWithUserId = async (userId, userUpdate) => {
     return updatedUser;
 }
 
-const deleteUserWithUserId = async (userId) => {
-    let deletedUser = await userModel.deleteUserWithUserId(userId);
-    return deletedUser;
-}
+
 
 const getUserWithUserId = async(userId) => {
     let user = await userModel.findById(userId);
@@ -33,6 +30,7 @@ const configUserAuth = async (user_id, auth) => {
     let success = await userModel.findOne({_id: user_id});
     success.auth = auth;
     success = await success.save();
+    console.log(auth)
     return success;
 }
 
