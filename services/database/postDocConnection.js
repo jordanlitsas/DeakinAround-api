@@ -21,12 +21,18 @@ const commentOnPost = async (post_id, contribution) => {
 
 const likePost = async (post_id, user_id) => {
     let success = await postModel.findOne({post_id: post_id});
-    if (!success.topLevelPost.likes.includes(user_id)){
+    let flag = true;
+    for (let i = 0; i < success.topLevelPost.likes.length; i++){
+        if (success.topLevelPost.likes[i] == user_id){
+            flag = false;
+        }
+    }
+    if (flag){
         success.topLevelPost.likes.push(user_id);
         success = await success.save();
         return success;
-    } 
-    return null;
+    }   
+
 }
 
 module.exports = {
