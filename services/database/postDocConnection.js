@@ -21,9 +21,12 @@ const commentOnPost = async (post_id, contribution) => {
 
 const likePost = async (post_id, user_id) => {
     let success = await postModel.findOne({post_id: post_id});
-    success.topLevelPost.likes.push(user_id);
-    success = await success.save();
-    return success;
+    if (success.topLevelPost.likes.includes(user_id)){
+        success.topLevelPost.likes.push(user_id);
+        success = await success.save();
+        return success;
+    } 
+    return null;
 }
 
 module.exports = {

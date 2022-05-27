@@ -97,8 +97,11 @@ const commentOnPost = async (req, res) => {
 const likePost = async (req, res) => {
     let post_id = req.body.post_id;
     let user_id = req.body.user_id;
+
     postCollection.likePost(post_id, user_id).then(success => {
-        if (success != null && Object.keys(success).length != 0){
+        if (success == null){
+            res.status(400).send();
+        } else if (success != null && Object.keys(success).length != 0){
             res.status(200).send();
         } else {
             res.status(500).send();
