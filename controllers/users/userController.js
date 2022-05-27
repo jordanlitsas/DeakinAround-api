@@ -18,7 +18,6 @@ const registerUser = async (req, res) => {
 
     if (flag){
 
-        let existingUser = await userCollection.getUserWithAuth(userData.auth);
         if (!existingUser){
             let newUser = await userCollection.registerUser(userData);
             if (!newUser){
