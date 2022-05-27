@@ -15,7 +15,7 @@ const createPost = async (req, res) => {
             author_id: data.user_id,
             content: data.content,
             timePosted: data.timePosted,
-            likes: 0
+            likes: []
         };
         let page_id = data.page_id;
         
@@ -46,7 +46,7 @@ const getPostsWithPageId = async (req, res) => {
                         name: `${postObj.topLevelPost.authorFirstName} ${postObj.topLevelPost.authorLastName}`,
                         content: postObj.topLevelPost.content,
                         timePosted: postObj.topLevelPost.timePosted,
-                        likes: postObj.topLevelPost.likes
+                        likes: postObj.topLevelPost.likes.length
                     },
                     comments:[]
                 };
@@ -57,7 +57,7 @@ const getPostsWithPageId = async (req, res) => {
                         name: `${commentObj.authorFirstName} ${commentObj.authorLastName}`,
                         content: commentObj.content,
                         timePosted: commentObj.timePosted,
-                        likes: commentObj.likes
+                        likes: commentObj.likes.length
                     }
                     post.comments.push(comment);
                 });
@@ -94,8 +94,21 @@ const commentOnPost = async (req, res) => {
     }
 }
 
+const likePost = async (req, res) => {
+    let post_id = req.body.post_id;
+    let user_id = req.body.user_id;
+    postCollection.likePost(post_id, user_id).then(success => {
+        if (success != null && Object.keys(success).length != 0){
+            res.status(200).send();
+        } else {
+            res.status(500).send();
+        }
+    })
+}
+
 module.exports = {
     createPost,
     getPostsWithPageId,
-    commentOnPost
+    commentOnPost,
+    likePost
 }

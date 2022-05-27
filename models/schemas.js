@@ -62,7 +62,7 @@ const contribution = new mongoose.Schema({
     author_id: {type: String},
     content: {type: String},
     timePosted: {type: String},
-    likes: {type: Number, default: 0}
+    likes: {type: [String]}
 });
 const post = new mongoose.Schema({
     page_id: {type: String, required: true},

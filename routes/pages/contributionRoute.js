@@ -8,7 +8,11 @@ router.post('/post', (req, res) => {
 
 router.get('/post', (req, res) => {
     Controller.getPostsWithPageId(req, res);
-})
+});
+
+router.get('/post/like', (req, res) => {
+    Controller.likePost(req, res);
+});
 
 
 router.post('/comment', (req, res) => {
