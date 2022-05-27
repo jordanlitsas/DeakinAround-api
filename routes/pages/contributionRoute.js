@@ -10,7 +10,7 @@ router.get('/post', (req, res) => {
     Controller.getPostsWithPageId(req, res);
 });
 
-router.get('/post/like', (req, res) => {
+router.post('/post/like', (req, res) => {
     Controller.likePost(req, res);
 });
 
