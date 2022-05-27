@@ -20,7 +20,7 @@ const commentOnPost = async (post_id, contribution) => {
 }
 
 const likePost = async (post_id, user_id) => {
-    let success = await postModel.findOne({post_id: post_id});
+    let success = await postModel.findOne({_id: post_id});
     let flag = true;
     for (let i = 0; i < success.topLevelPost.likes.length; i++){
         if (success.topLevelPost.likes[i] == user_id){
