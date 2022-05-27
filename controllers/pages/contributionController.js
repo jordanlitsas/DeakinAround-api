@@ -99,7 +99,7 @@ const likePost = async (req, res) => {
     let user_id = req.body.user_id;
 
     postCollection.likePost(post_id, user_id).then(success => {
-        if (success == null){
+        if (!success){
             res.status(400).send();
         } else if (success != null && Object.keys(success).length != 0){
             res.status(200).send();

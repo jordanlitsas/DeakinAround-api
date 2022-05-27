@@ -31,7 +31,10 @@ const likePost = async (post_id, user_id) => {
         success.topLevelPost.likes.push(user_id);
         success = await success.save();
         return success;
-    }   
+    } else {
+        return false;
+    }
+    
 
 }
 
