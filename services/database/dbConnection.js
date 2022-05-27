@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://admin:deakinaroundadmin@deakinaround.mixps.mongodb.net/dev?retryWrites=true&w=majority";
+const uri = "mongodb+srv://admin:deakinaroundadmin@deakinaround.mixps.mongodb.net/auth?retryWrites=true&w=majority";
 
 let client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
