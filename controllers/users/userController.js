@@ -77,6 +77,8 @@ const configUserAuth = async (req ,res) => {
 const addNotificationToken = async (req, res) => {
     let user_id = req.body.user_id;
     let token = req.body.token;
+    console.log(user_id)
+    console.log(token)
     userCollection.addNotificationToken(user_id, token).then(success => {
         if (success){
             res.status(200).send();
