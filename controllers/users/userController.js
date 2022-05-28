@@ -27,7 +27,7 @@ const registerUser = async (req, res) => {
                 if (!newUserPagesDoc){
                     res.status(500).send({error: "UserPage doc not inserted."})
                 } else {
-                    notificationService.sendNotification(newUser.fcmToken, "Welcome to DeakinAround", "Your home of Deakin events.");
+                    // notificationService.sendNotification(newUser.fcmToken, "Welcome to DeakinAround", "Your home of Deakin events.");
                     res.status(200).send({user_id: newUser._id});
                 }
             }
@@ -43,7 +43,7 @@ const loginUser = async (req, res) => {
         if (!retrievedUser){
             res.status(204).send()
         } else{
-            notificationService.sendNotification(retrievedUser.fcmToken, "Welcome back");
+            // notificationService.sendNotification(retrievedUser.fcmToken, "Welcome back");
             res.status(200).send({user_id: retrievedUser._id, firstName: retrievedUser.firstName});
 
         } 
