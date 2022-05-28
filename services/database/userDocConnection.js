@@ -20,7 +20,7 @@ const updateUserWithUserId = async (userId, userUpdate) => {
 
 const addNotificationToken = async(user_id, token) => {
     let success = await userModel.findOne({_id: user_id});
-    success.token = token;
+    success.fcmToken = token;
     success = await success.save();
     return success;
 }
