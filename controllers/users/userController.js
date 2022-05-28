@@ -27,7 +27,7 @@ const registerUser = async (req, res) => {
                 if (!newUserPagesDoc){
                     res.status(500).send({error: "UserPage doc not inserted."})
                 } else {
-                    notificationService.sendNotification(retrievedUser.fcmToken, "Welcome to DeakinAround", "Your home of Deakin events.");
+                    notificationService.sendNotification(newUser.fcmToken, "Welcome to DeakinAround", "Your home of Deakin events.");
                     res.status(200).send({user_id: newUser._id});
                 }
             }
