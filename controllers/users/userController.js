@@ -39,7 +39,6 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     let auth = req.body.auth;
     Services.userService.getUserWithAuth(auth).then(retrievedUser => {
-        console.log(retrievedUser)
         if (!retrievedUser){
             res.status(204).send()
         } else{
@@ -76,7 +75,7 @@ const configUserAuth = async (req ,res) => {
 
 const addNotificationToken = async (req, res) => {
     let user_id = req.body.user_id;
-    let token = req.body.token;
+    let token = req.body.auth;
     console.log(user_id)
     console.log(token)
     userCollection.addNotificationToken(user_id, token).then(success => {
