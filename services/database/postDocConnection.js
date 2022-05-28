@@ -9,6 +9,13 @@ const createPost = async (page_id, contribution,) => {
     return savedPost;
 }
 
+
+const getWithId = async (post_id) => {
+    let post = await postModel.findOne({_id: post_id});
+    return post;
+
+}
+
 const getPostsWithPageId = async (page_id) => {
     let posts = await postModel.find({page_id: page_id});
     return posts;
@@ -42,5 +49,6 @@ module.exports = {
     createPost,
     getPostsWithPageId,
     commentOnPost,
-    likePost
+    likePost,
+    getWithId
 }

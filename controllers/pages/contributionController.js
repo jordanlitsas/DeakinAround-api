@@ -2,7 +2,7 @@ const { response } = require('express');
 const contributionBuilder = require('../../services/database/contributionBuilder');
 const postCollection = require('../../services/database/postDocConnection');
 const userCollection = require('../../services/database/userDocConnection');
-
+const notificationService = require('../../services/users/notificationService')
 
 const createPost = async (req, res) => {
     let data = req.body;
@@ -83,11 +83,19 @@ const commentOnPost = async (req, res) => {
         };
         let post_id = data.post_id;
         
+        let target_id = await postCollection.getWithId(post_id);
+        target_id = target_id.topLevelPost.author_id;
+
+        let fcmTarget = await userCollection.getUserWithUserId(target_id);
+        fcmTarget = fcmTarget.fcmToken;
+
+
         contribution = await contributionBuilder.build(contribution);
         postCollection.commentOnPost(post_id, contribution).then(success => {
             if (!success){
                 res.status(500).send({error: "Post not inserted"});
             } else {
+                notificationService.sendNotification(fcmTarget, `${userDoc.firstName} ${userDoc.lastName} commented on your post.`, data.content);
                 res.status(200).send();
             }
         });
@@ -97,6 +105,7 @@ const commentOnPost = async (req, res) => {
 const likePost = async (req, res) => {
     let post_id = req.body.post_id;
     let user_id = req.body.user_id;
+
 
     postCollection.likePost(post_id, user_id).then(success => {
         if (!success){
