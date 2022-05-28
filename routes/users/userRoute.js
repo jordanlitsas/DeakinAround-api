@@ -18,7 +18,7 @@ router.put('/auth', (req, res) => {
     Controller.configUserAuth(req, res);
 })
 
-router.put('/notification/token', (req, res) => {
+router.post('/notification/token', (req, res) => {
     Controller.addNotificationToken(req, res);
 })
 
