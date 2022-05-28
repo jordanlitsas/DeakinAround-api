@@ -86,8 +86,11 @@ const commentOnPost = async (req, res) => {
         let target_id = await postCollection.getWithId(post_id);
         target_id = target_id.topLevelPost.author_id;
 
+        console.log('target_id',target_id)
+
         let fcmTarget = await userCollection.getUserWithUserId(target_id);
         fcmTarget = fcmTarget.fcmToken;
+        console.log('fcmTarget',fcmTarget)
 
 
         contribution = await contributionBuilder.build(contribution);
