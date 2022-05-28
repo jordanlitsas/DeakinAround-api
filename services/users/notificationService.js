@@ -9,9 +9,9 @@ const sendNotification = (fcm, title, body) => {
                 body: body,
             }
         };
-        const fcm = new FCM(serverKey);
+        const client = new FCM(serverKey);
 
-        fcm.send(message, function(err, response) {
+        client.send(message, function(err, response) {
             if (err) {
                 console.log("Something has gone wrong!"+err);
                 console.log("Respponse:! "+response);
