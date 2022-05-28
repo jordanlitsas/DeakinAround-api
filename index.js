@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+const notificationService = require('./services/users/notificationService');
+
 app.set('port', (process.env.PORT || 5000))
 
 const userRoute = require('./routes/users/userRoute');

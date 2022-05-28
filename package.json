@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/jordanlitsas/DeakinAround-api#readme",
   "dependencies": {
+    "@firebase/messaging": "^0.9.13",
     "body-parser": "^1.20.0",
     "express": "^4.17.3",
+    "fcm-node": "^1.6.1",
     "mongodb": "^4.5.0",
     "mongoose": "^6.2.10",
     "nodemon": "^2.0.16"
