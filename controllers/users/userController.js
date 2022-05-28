@@ -71,10 +71,23 @@ const configUserAuth = async (req ,res) => {
     })
 }
 
+const addNotificationToken = async (req, res) => {
+    let user_id = req.body.user_id;
+    let token = req.body.token;
+    userCollection.addNotificationToken(user_id, token).then(success => {
+        if (success){
+            res.status(200).send();
+        } else {
+            res.status(500).send();
+        }
+    })
+}
+
 
 module.exports = {
     registerUser,
     loginUser,
     configUserAuth,
-    getUserWithUserId
+    getUserWithUserId,
+    addNotificationToken
 }

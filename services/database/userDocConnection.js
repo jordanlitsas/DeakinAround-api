@@ -9,7 +9,6 @@ const registerUser = async (userData) => {
 }
 
 const getUserWithAuth = async (auth) => {
-    console.log("db " + auth)
     let user = await userModel.findOne({auth: auth});
     return user;
 }
@@ -19,7 +18,12 @@ const updateUserWithUserId = async (userId, userUpdate) => {
     return updatedUser;
 }
 
-
+const addNotificationToken = async(user_id, token) => {
+    let success = await userModel.findOne({_id: user_id});
+    success.token = token;
+    success = await success.save();
+    return success;
+}
 
 const getUserWithUserId = async(userId) => {
     let user = await userModel.findById(userId);
@@ -30,7 +34,6 @@ const configUserAuth = async (user_id, auth) => {
     let success = await userModel.findOne({_id: user_id});
     success.auth = auth;
     success = await success.save();
-    console.log(auth)
     return success;
 }
 
@@ -39,5 +42,6 @@ module.exports = {
     getUserWithAuth,
     updateUserWithUserId,
     getUserWithUserId,
-    configUserAuth
+    configUserAuth,
+    addNotificationToken
 }
