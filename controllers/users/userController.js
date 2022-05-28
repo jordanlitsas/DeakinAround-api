@@ -1,6 +1,7 @@
 const Services = require('../../services');
 const userPageCollection = require('../../services/database/userPageDocConnection');
 const userCollection = require('../../services/database/userDocConnection');
+const notificationService = require('../../services/users/notificationService')
 const { userService } = require('../../services');
 
 const registerUser = async (req, res) => {
@@ -26,6 +27,7 @@ const registerUser = async (req, res) => {
                 if (!newUserPagesDoc){
                     res.status(500).send({error: "UserPage doc not inserted."})
                 } else {
+                    notificationService.sendNotification(retrievedUser.fcmToken, "Welcome to DeakinAround", "Your home of Deakin events.");
                     res.status(200).send({user_id: newUser._id});
                 }
             }
@@ -36,13 +38,14 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
     let auth = req.body.auth;
-    console.log(auth)
     Services.userService.getUserWithAuth(auth).then(retrievedUser => {
         console.log(retrievedUser)
         if (!retrievedUser){
             res.status(204).send()
         } else{
+            notificationService.sendNotification(retrievedUser.fcmToken, "Welcome back");
             res.status(200).send({user_id: retrievedUser._id, firstName: retrievedUser.firstName});
+
         } 
     });
 }
